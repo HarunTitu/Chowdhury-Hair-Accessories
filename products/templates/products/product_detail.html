@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product.name }} | Chowdhury Hair Accessories</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .product-detail {
+            max-width: 1000px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            display: flex;
+            gap: 50px;
+            border-radius: 10px;
+        }
+
+        .product-image {
+            width: 45%;
+        }
+
+        .product-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        .product-info {
+            width: 55%;
+        }
+
+        .product-info h1 {
+            font-size: 32px;
+            margin-top: 0;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .description {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .available {
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            .product-detail {
+                flex-direction: column;
+            }
+
+            .product-image,
+            .product-info {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="product-detail">
+
+        <!-- Product Image -->
+        <div class="product-image">
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}"
+                     alt="{{ product.name }}">
+            {% endif %}
+
+        </div>
+
+
+        <!-- Product Information -->
+        <div class="product-info">
+
+            <h1>{{ product.name }}</h1>
+
+            <p class="price">
+                Price: {{ product.price }} BDT
+            </p>
+
+            <p class="description">
+                {{ product.description }}
+            </p>
+
+            <p class="available">
+
+                {% if product.available %}
+                    Available
+                {% else %}
+                    Out of Stock
+                {% endif %}
+
+            </p>
+
+            <a class="back-link"
+               href="{% url 'product_list' %}">
+                ← Back to Products
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

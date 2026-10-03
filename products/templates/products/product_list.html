@@ -74,11 +74,17 @@
 
     <div class="product-card">
 
-      {% if product.image %}
-      <img src="{{ product.image.url }}" alt="{{ product.name }}">
-      {% endif %}
+      <a href="{% url 'product_detail' product.id %}">
+        {% if product.image %}
+          <img src="{{ product.image.url }}"
+          alt="{{ product.name
+          width="200"}}">
+        {% endif %}
+      </a>
 
-      <h2>{{ product.name }}</h2>
+      <a href="{% url 'product_detail' product.id %}">
+        <h2>{{ product.name }}</h2>
+      </a>
 
       <p class="category">
         {{ product.category }}
