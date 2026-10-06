@@ -115,6 +115,17 @@
                 {% endif %}
 
             </p>
+            {% if product.available %}
+                <a href="{% url 'add_to_cart' product.id %}">
+                    <button type="button">🛒 Add to Cart</button>
+                </a>
+            {% else %}
+                <button type="button" disabled>
+                    Out of Stock
+                </button>
+            {% endif %}
+
+
 
             <a class="back-link"
                href="{% url 'product_list' %}">
