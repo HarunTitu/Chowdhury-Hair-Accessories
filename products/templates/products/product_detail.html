@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
             font-family: Arial, sans-serif;
             background-color: #f8f8f8;
             margin: 0;
-            padding: 40px;
+            padding: 40px 20px;
         }
 
         .product-detail {
@@ -20,8 +21,9 @@
             background-color: white;
             padding: 30px;
             display: flex;
-            gap: 50px;
+            gap: 40px;
             border-radius: 10px;
+            box-sizing: border-box;
         }
 
         .product-image {
@@ -59,6 +61,27 @@
             font-weight: bold;
         }
 
+        .button {
+            display: inline-block;
+            padding: 12px 18px;
+            margin: 8px 8px 8px 0;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .add-to-cart {
+            background-color: #198754;
+            color: white;
+        }
+
+        .view-cart {
+            background-color: #0d6efd;
+            color: white;
+        }
+
         .back-link {
             display: inline-block;
             margin-top: 20px;
@@ -66,13 +89,23 @@
         }
 
         @media (max-width: 700px) {
+            body {
+                padding: 15px;
+            }
+
             .product-detail {
                 flex-direction: column;
+                padding: 20px;
+                gap: 20px;
             }
 
             .product-image,
             .product-info {
                 width: 100%;
+            }
+
+            .product-info h1 {
+                font-size: 26px;
             }
         }
     </style>
@@ -88,10 +121,11 @@
             {% if product.image %}
                 <img src="{{ product.image.url }}"
                      alt="{{ product.name }}">
+            {% else %}
+                <p>No image available.</p>
             {% endif %}
 
         </div>
-
 
         <!-- Product Information -->
         <div class="product-info">
@@ -107,25 +141,33 @@
             </p>
 
             <p class="available">
-
                 {% if product.available %}
                     Available
                 {% else %}
                     Out of Stock
                 {% endif %}
-
             </p>
+
+            <!-- Add to Cart -->
             {% if product.available %}
-                <a href="{% url 'add_to_cart' product.id %}">
-                    <button type="button">🛒 Add to Cart</button>
+                <a class="button add-to-cart"
+                   href="{% url 'add_to_cart' product.id %}">
+                    🛒 Add to Cart
                 </a>
             {% else %}
-                <button type="button" disabled>
+                <button class="button" type="button" disabled>
                     Out of Stock
                 </button>
             {% endif %}
 
+            <!-- View Cart -->
+            <a class="button view-cart"
+               href="{% url 'cart_detail' %}">
+                🛍️ View Cart
+            </a>
 
+            <!-- Back to Products -->
+            <br>
 
             <a class="back-link"
                href="{% url 'product_list' %}">
@@ -138,3 +180,4 @@
 
 </body>
 </html>
+```

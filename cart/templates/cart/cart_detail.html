@@ -104,17 +104,32 @@
                             Price: {{ item.product.price }} BDT
                         </p>
 
+                        <form method="POST" action="{% url 'update_cart' item.product.id %}"> {% csrf_token %} 
+                            <label for="quantity-{{ item.product.id }}">Quantity:</label> 
+                            <input type="number" id="quantity-{{ item.product.id }}" name="quantity" value="{{ item.quantity }}" min="0" required > 
+                            <button type="submit">Update Quantity</button> 
+                        </form>
+                        
+                        <!--
                         <p>
                             Quantity: {{ item.quantity }}
                         </p>
+                        <-->
 
                         <p class="subtotal">
                             Subtotal: {{ item.subtotal }} BDT
                         </p>
 
                     </div>
+                <form method="POST"
+                    action="{% url 'remove_from_cart' item.product.id %}">
+                    {% csrf_token %}
+                    <button type="submit">
+                        Remove from Cart
+                    </button>
+                </form>
 
-                </div>
+            </div>
 
             {% endfor %}
 
